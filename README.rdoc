@@ -1,0 +1,44 @@
+= Ezgraphix Demo App
+
+A simple demo app to show off the some of the features of ezgraphix.
+
+== Installing
+
+  Checkout from github and update submodule
+  $ git clone git://github.com/ragnar/ezgraphix_demo_app.git
+  $ cd ezgraphix_demo_app
+  $ git submodule init
+  $ git submodule update
+  $ cp /from/your/copy/of/FusionCharts.js public/javascripts/
+  $ cp /from/your/copy/of/FusionCharts/*.swf public/FusionCharts/
+  $ ./script/server
+
+== Usage
+
+Assuming that "@g" exists as a Ezgraphix::Graphic object.
+
+
+=== Single Series Graphs datasets
+
+Single Series graphs doesn't need the +<dataset>+ root tag:
+
+  ds = Ezgraphix::Data::Dataset.new( :include_root => false )
+  {:ruby => 1, :perl => 2, :smalltalk => 3}.each do |k,v|
+    ds << Ezgraphix::Data::Set.new( v, :label => k )
+  end
+  @g.add_dataset( ds )
+
+
+=== Multi Series Graphs dataset
+
+Multi Series graphs need the +<dataset>+ root tag and some +<categories>+:
+
+  @g.add_categories( [2008, 2009])
+  
+  [:ruby, :perl, :smalltalk].each do |s|
+    ds = Ezgraphix::Data::Dataset.new( :include_root => true, :seriesName => s )
+    ds << Ezgraphix::Data::Set.new( 243 + rand(243))
+    ds << Ezgraphix::Data::Set.new( 273 + rand(273))
+    @g.add_dataset( ds )
+  end
+  

@@ -29,7 +29,7 @@ class GraphsController < ApplicationController
     render :action => "index"
   end
 
-  def pie3d
+  def ss_pie3d
     @graph = Ezgraphix::Graphic.new( "Pie3D" )
 
     ds = Ezgraphix::Data::Dataset.new( :include_root => false )
@@ -38,6 +38,21 @@ class GraphsController < ApplicationController
       ds << Ezgraphix::Data::Set.new( v, :label => k)
     end
     @graph.add_dataset( ds )
+
+    render :action => "index"
+  end
+
+  def st_stackedcolumn_3D
+    @graph = Ezgraphix::Graphic.new( "StackedColumn3D")
+    
+    @graph.add_categories( [2007,2008,2009])
+    ['ruby', 'perl', 'smalltalk'].each do |v|
+      ds = Ezgraphix::Data::Dataset.new( :include_root => true, :seriesName => v )
+      ds << Ezgraphix::Data::Set.new( 243 + rand(243))
+      ds << Ezgraphix::Data::Set.new( 273 + rand(273))
+      ds << Ezgraphix::Data::Set.new( 223 + rand(223))
+      @graph.add_dataset( ds )
+    end
 
     render :action => "index"
   end
