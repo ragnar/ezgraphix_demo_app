@@ -1,0 +1,29 @@
+<h1><%= params[:action].humanize -%></h1>
+<br />
+<style type="text/css" media="screen">
+  pre {
+    padding-left:20px;
+  }
+  #graph_content {
+    text-align: center;
+  }
+</style>
+<div id="graph_content">
+  <%= render_ezgraphix @graph if @graph %>
+</div>
+
+<br />
+<h2>Other chart types</h2>
+<ul>
+<% controller.send("action_methods").sort.each do |m| -%>
+  <li><%= link_to m.humanize, :action => m -%></li>
+<% end -%>
+</ul>
+
+<% if @graph -%>
+<br />
+<h2>XML for current chart</h2>
+<pre>
+<%=h @graph.to_xml( :indent => 2 ) -%>
+</pre>
+<% end -%>
