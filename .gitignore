@@ -16,4 +16,5 @@ doc/app
 
 # Ignore fusion chart stuff to prevent redistributing
 public/javascripts/FusionCharts.js
+*.swf
 
