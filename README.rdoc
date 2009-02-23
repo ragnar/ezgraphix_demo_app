@@ -42,3 +42,10 @@ Multi Series graphs need the +<dataset>+ root tag and some +<categories>+:
     @g.add_dataset( ds )
   end
   
+
+=== vLines
+
+On single series graph types, the vLine is added directly between sets. On multi
+series graph types vLines is added between categories.
+
+
